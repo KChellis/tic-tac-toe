@@ -17,25 +17,32 @@
         <input id="player2" type="text" name="" placeholder="Player two" required>
         <button type="submit" name="button">Play!</button>
       </form>
-      <table>
-        <tbody>
-          <tr>
-            <td><button id="a0" type="button" class="cells" value="a0">__</button></td>
-            <td><button id="a1" type="button" class="cells" value="a1">__</button></td>
-            <td><button id="a2" type="button" class="cells" value="a2">__</button></td>
-          </tr>
-          <tr>
-            <td><button id="b0" type="button" class="cells" value="b0">__</button></td>
-            <td><button id="b1" type="button" class="cells" value="b1">__</button></td>
-            <td><button id="b3" type="button" class="cells" value="b2">__</button></td>
-          </tr>
-          <tr>
-            <td><button id="c0" type="button" class="cells" value="c0">__</button></td>
-            <td><button id="c1" type="button" class="cells" value="c1">__</button></td>
-            <td><button id="c2" type="button" class="cells" value="c2">__</button></td>
-          </tr>
-        </tbody>
-      </table>
+      <div id="board">
+        <h3><span class="active"></span>'s Turn</h3>
+        <table>
+          <tbody>
+            <tr>
+              <td><button id="a0" type="button" class="cells" value="a0">__</button></td>
+              <td><button id="a1" type="button" class="cells" value="a1">__</button></td>
+              <td><button id="a2" type="button" class="cells" value="a2">__</button></td>
+            </tr>
+            <tr>
+              <td><button id="b0" type="button" class="cells" value="b0">__</button></td>
+              <td><button id="b1" type="button" class="cells" value="b1">__</button></td>
+              <td><button id="b3" type="button" class="cells" value="b2">__</button></td>
+            </tr>
+            <tr>
+              <td><button id="c0" type="button" class="cells" value="c0">__</button></td>
+              <td><button id="c1" type="button" class="cells" value="c1">__</button></td>
+              <td><button id="c2" type="button" class="cells" value="c2">__</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div id="win">
+        <p><span class="active"></span> Won!!!!</p>
+        <button id="newgame" type="button" name="newgame">New Game</button>
+      </div>
     </div>
   </body>
 </html>
