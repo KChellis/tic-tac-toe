@@ -4,15 +4,31 @@
 .cells {
   height: 150px;
   width: 150px;
+  background-color: rgb(35, 92, 102, .7);
+}
+.cells[disabled] {
+  background-color: rgb(35, 92, 102, .5);
 }
 table {
   margin-left: auto;
   margin-right: auto;
 }
-img {
+.mark{
   height: 100px;
   width: 100px;
+  background-color: transparent;
+}
+.trophy{
+  height: 250px;
 }
 body {
   text-align: center;
+  background-color: #1d5059;
+  background-image: url("https://www.transparenttextures.com/patterns/45-degree-fabric-light.png");
+}
+p {
+  font-size: 25px;
+}
+h1 {
+  background-color: rgb(35, 92, 102, .4);
 }

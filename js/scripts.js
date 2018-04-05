@@ -75,8 +75,8 @@ function nextPlayer() {   //changes the active player
 $(function() {
   $('#names').submit(function (event){ //takes in values for name from user and makes 2 player objects
     event.preventDefault();
-    player1 = new Player($('#player1').val(), 'X', '<img src="img/X.png" alt="X">');
-    player2 = new Player($('#player2').val(), 'O', '<img src="img/oh.png" alt="O">');
+    player1 = new Player($('#player1').val(), 'X', '<img class="mark" src="img/X.png" alt="X">');
+    player2 = new Player($('#player2').val(), 'O', '<img class="mark" src="img/oh.png" alt="O">');
     board = new Board();
     activePlayer = player1;
     passivePlayer = player2;
