@@ -3,6 +3,7 @@ var board;
 var cell;
 var activePlayer;
 var passivePlayer;
+var tieCount = 0;
 //
 // const EMPTY = 0;
 // const LINE_SIDE = 1;
@@ -17,15 +18,16 @@ var passivePlayer;
 // ]
 
 function Board () { //creates a board object with array values of 0
-  this.a = ["", "", ""];
-  this.b = ["", "", ""];
-  this.c = ["", "", ""];
+  this.a = [" ", " ", " "];
+  this.b = [" ", " ", " "];
+  this.c = [" ", " ", " "];
 
 } //end of board
 
 function Player (name, mark) {  //creates a player object with a name and a mark type
   this.name = name;
   this.mark = mark;
+  this.count = 0;
 } //end of player
 Board.prototype.markBoard = function(){  //Marks the board in the correct cell with the active player's mark
   var row = cell[0];
@@ -59,6 +61,15 @@ Board.prototype.checkWin = function() { //Checks the board to see if the win con
     return false;
   }
 }  //end checkWIn
+Board.prototype.checkTie = function() {
+  for (var i = 0; i < 3; i++) {
+    if (/[^XO]/.test(this.a[i]) || /[^XO]/.test(this.b[i]) || /[^XO]/.test(this.c[i])) {
+      return false;
+    }else {
+      return true;
+    }
+  }
+}
 function nextPlayer() {   //changes the active player
   var temp = activePlayer;
   activePlayer= passivePlayer;
@@ -73,8 +84,11 @@ $(function() {
     activePlayer = player1;
     passivePlayer = player2;
     $("#board").show();
+    $("#counter").show();
     $("#names").hide();
     $(".active").text(activePlayer.name);
+    $("#p1").text(player1.name);
+    $("#p2").text(player2.name);
   });
 
   $('.cells').click(function(event){ //marks board and checks for win
@@ -83,17 +97,26 @@ $(function() {
     board.markBoard();
     $(this).text(activePlayer.mark);
     win = board.checkWin();
-    console.log(win);
-    if (!win) {
-      nextPlayer();
-      $(".active").text(activePlayer.name);
-    }else{
+    tie = board.checkTie();
+    console.log(tie);
+    if (win) {
       $("#win").show();
       $("#board").hide();
+      activePlayer.count += 1;
+      $("#count1").text(player1.count);
+      $("#count2").text(player2.count);
+    }else if(tie){
+      $("#tie").show();
+      $("#board").hide();
+      tieCount += 1;
+      $("#countT").text(tieCount);
+    }else {
+      nextPlayer();
+      $(".active").text(activePlayer.name);
     }
   });
 
-  $("#newgame").click(function() {
+  $(".newgame").click(function() {
     location.reload();
   });
 });
