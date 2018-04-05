@@ -39,6 +39,26 @@ Board.prototype.markBoard = function(){
     this.c[col]= mark;
   }
 }
+Board.prototype.checkWin = function() {
+  for (var i = 0; i < 3; i++) {
+    if (this.a[i] === this.b[i] && this.a[i] === this.c[i] && /[XO]/.test(this.a[i])) {
+      return true;
+    }
+  }
+  if (this.a[0] === this.a[2] && this.a[0] === this.a[2] && /[XO]/.test(this.a[0])) {
+    return true;
+  }else if (this.b[0] === this.b[2] && this.b[0] === this.b[2] && /[XO]/.test(this.b[0])) {
+    return true;
+  }else if (this.c[0] === this.c[2] && this.c[0] === this.c[2] && /[XO]/.test(this.c[0])) {
+    return true;
+  }else if (this.a[0] === this.b[1] && this.a[0] === this.c[2] && /[XO]/.test(this.a[0])) {
+    return true;
+  }else if (this.a[2] === this.b[1] && this.a[2] === this.c[0] && /[XO]/.test(this.a[2])) {
+    return true;
+  }else {
+    return false;
+  }
+}
 function nextPlayer() {
   var temp = activePlayer;
   activePlayer= passivePlayer;
@@ -59,7 +79,11 @@ $(function() {
     cell = $(this).val().split("");
     board.markBoard();
     $(this).text(activePlayer.mark);
-
+    win = board.checkWin();
+    console.log(board.a);
+    console.log(board.b);
+    console.log(board.c);
+    console.log(win);
     nextPlayer();
   });
 });
