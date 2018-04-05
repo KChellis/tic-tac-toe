@@ -1,3 +1,7 @@
 #board, #win, #tie, #counter {
   display: none;
 }
+.cells {
+  height: 150px;
+  width: 150px;
+}

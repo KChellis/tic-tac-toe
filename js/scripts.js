@@ -4,18 +4,6 @@ var cell;
 var activePlayer;
 var passivePlayer;
 var tieCount = 0;
-//
-// const EMPTY = 0;
-// const LINE_SIDE = 1;
-// const LINE_TOP = 2;
-//
-// newboard = [
-//   0, 1, 0, 1, 0,
-//   2, 2, 2, 2, 2,
-//   0, 1, 0, 1, 0,
-//   2, 2, 2, 2, 2,
-//   0, 1, 0, 1, 0
-// ]
 
 function Board () { //creates a board object with array values of 0
   this.a = [" ", " ", " "];
@@ -60,8 +48,8 @@ Board.prototype.checkWin = function() { //Checks the board to see if the win con
   }else {
     return false;
   }
-}  //end checkWIn
-Board.prototype.checkTie = function() {
+}  //end checkWin
+Board.prototype.checkTie = function() { //checks to see if game is a tie
   for (var i = 0; i < 3; i++) {
     if (/[^XO]/.test(this.a[i]) || /[^XO]/.test(this.b[i]) || /[^XO]/.test(this.c[i])) {
       return false;
@@ -96,16 +84,14 @@ $(function() {
     cell = $(this).val().split("");
     board.markBoard();
     $(this).text(activePlayer.mark);
-    win = board.checkWin();
-    tie = board.checkTie();
     console.log(tie);
-    if (win) {
+    if (board.checkWin()) {
       $("#win").show();
       $("#board").hide();
       activePlayer.count += 1;
       $("#count1").text(player1.count);
       $("#count2").text(player2.count);
-    }else if(tie){
+    }else if(board.checkTie()){
       $("#tie").show();
       $("#board").hide();
       tieCount += 1;
@@ -117,6 +103,13 @@ $(function() {
   });
 
   $(".newgame").click(function() {
-    location.reload();
+    $(".cells").removeAttr("disabled");
+    $(".cells").text("");
+    board = new Board();
+    nextPlayer();
+    $(".active").text(activePlayer.name);
+    $("#board").show();
+    $("#tie").hide();
+    $("#win").hide();
   });
 });
