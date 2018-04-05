@@ -5,3 +5,14 @@
   height: 150px;
   width: 150px;
 }
+table {
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  height: 100px;
+  width: 100px;
+}
+body {
+  text-align: center;
+}

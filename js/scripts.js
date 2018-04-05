@@ -12,9 +12,10 @@ function Board () { //creates a board object with array values of 0
 
 } //end of board
 
-function Player (name, mark) {  //creates a player object with a name and a mark type
+function Player (name, mark, mark2) {  //creates a player object with a name and a mark type
   this.name = name;
   this.mark = mark;
+  this.mark2 = mark2
   this.count = 0;
 } //end of player
 Board.prototype.markBoard = function(){  //Marks the board in the correct cell with the active player's mark
@@ -49,14 +50,22 @@ Board.prototype.checkWin = function() { //Checks the board to see if the win con
     return false;
   }
 }  //end checkWin
+Board.prototype.xoTest = function(num) {
+  if (/[^XO]/.test(this.a[num]) || /[^XO]/.test(this.b[num]) || /[^XO]/.test(this.c[num])) {
+    return false;
+  } else{
+    return true;
+  }
+}
 Board.prototype.checkTie = function() { //checks to see if game is a tie
+  var test;
   for (var i = 0; i < 3; i++) {
-    if (/[^XO]/.test(this.a[i]) || /[^XO]/.test(this.b[i]) || /[^XO]/.test(this.c[i])) {
-      return false;
-    }else {
-      return true;
+    test= board.xoTest(i);
+    if (!test) {
+      return test
     }
   }
+  return test;
 }
 function nextPlayer() {   //changes the active player
   var temp = activePlayer;
@@ -66,8 +75,8 @@ function nextPlayer() {   //changes the active player
 $(function() {
   $('#names').submit(function (event){ //takes in values for name from user and makes 2 player objects
     event.preventDefault();
-    player1 = new Player($('#player1').val(), 'X');
-    player2 = new Player($('#player2').val(), 'O');
+    player1 = new Player($('#player1').val(), 'X', '<img src="img/X.png" alt="X">');
+    player2 = new Player($('#player2').val(), 'O', '<img src="img/oh.png" alt="O">');
     board = new Board();
     activePlayer = player1;
     passivePlayer = player2;
@@ -83,8 +92,7 @@ $(function() {
     this.setAttribute("disabled", "disabled");
     cell = $(this).val().split("");
     board.markBoard();
-    $(this).text(activePlayer.mark);
-    console.log(tie);
+    $(this).append(activePlayer.mark2);
     if (board.checkWin()) {
       $("#win").show();
       $("#board").hide();
